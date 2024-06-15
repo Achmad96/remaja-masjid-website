@@ -6,7 +6,7 @@ import { getCategories } from '@/utils/notion-service';
 export default async function Navbar() {
   const categories = await getCategories();
   return (
-    <nav className="navbar bg-[#55AD9B] fixed z-[100] h-[12dvh] justify-between px-7">
+    <nav className="navbar bg-[#55AD9B] z-[100] h-[12dvh] justify-between px-7">
       <Link href={'/'} className="btn btn-ghost relative w-16 h-[3.5rem]">
         <Image
           src={'/logo.png'}

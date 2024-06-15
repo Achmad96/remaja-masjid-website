@@ -13,7 +13,7 @@ async function PhotoComponent() {
         sizes="(max-width: 640px) 80vw, (max-width: 768px) 80vw, (max-width: 1024px) 100vw, (max-width: 1280px) 100vw"
         alt="hero-image"
       />
-      <div className="absolute z-30 w-full h-dvh bg-black bg-opacity-70" />
+      <div className="absolute z-30 w-full h-full bg-black bg-opacity-70" />
     </>
   );
 }

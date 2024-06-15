@@ -14,7 +14,7 @@ export default function ArticleCard({ article }: IArticleCard) {
       href={`/category/${article.category.toLowerCase()}/${article.slug}`}
       className="card card-compact w-96 min-w-96 bg-base-100 shadow-xl rounded-lg"
     >
-      <figure>
+      <figure className="h-72">
         <img src={cover} alt={title} />
       </figure>
       <div className="card-body min-h-40">

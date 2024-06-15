@@ -40,8 +40,8 @@ export default async function Page({ params }: PageProps) {
   const { img, base64 } = res as BlurResponseType;
   return (
     <main className="min-h-dvh h-auto w-full mt-10">
-      <div className="mb-10 flex w-full flex-col gap-3 pl-36 max-sm:pl-5">
-        <div className="h-auto w-[90%]">
+      <div className="mb-10 flex w-full flex-col gap-3 max-sm:pl-5">
+        <div className="h-auto w-[80%] mx-auto">
           <Image
             {...img}
             alt="cover"
@@ -51,11 +51,13 @@ export default async function Page({ params }: PageProps) {
             className="h-96 w-full rounded-3xl"
           />
         </div>
-        <h1 className="mt-7 text-5xl max-sm:text-4xl">{article.title}</h1>
-        <p>Terakhir update per tanggal {article.updatedAt}</p>
+        <div className="ml-[10%] flex flex-col gap-3">
+          <h1 className="mt-7 text-5xl max-sm:text-4xl">{article.title}</h1>
+          <p>Terakhir update per tanggal {article.updatedAt}</p>
+        </div>
       </div>
       <div className="flex h-auto w-full items-center justify-center">
-        <article className="prose mx-auto mb-10 max-w-[80%]">
+        <article className="prose prose-p:text-justify mx-auto mb-10 max-w-[80%]">
           {markdown.parent ? (
             <Markdown>{markdown.parent}</Markdown>
           ) : (
