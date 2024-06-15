@@ -1,3 +1,4 @@
+import { IoPersonCircle } from 'react-icons/io5';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -25,15 +26,19 @@ export default function ArticleCard({ article }: IArticleCard) {
         <p>{updatedAt}</p>
         {author && (
           <div className="flex p-3 items-center justify-between gap-2">
-            <div className="relative w-5 h-5">
-              <Image
-                className="rounded-full"
-                src={author.avatar}
-                alt={author.name}
-                fill={true}
-                sizes="(max-width: 640px) 20vw, (max-width: 768px) 30vw, (max-width: 1024px) 50vw, (max-width: 1280px) 50vw"
-              />
-            </div>
+            {author.avatar ? (
+              <div className="relative w-5 h-5">
+                <Image
+                  className="rounded-full"
+                  src={author.avatar}
+                  alt={author.name}
+                  fill={true}
+                  sizes="(max-width: 640px) 20vw, (max-width: 768px) 30vw, (max-width: 1024px) 50vw, (max-width: 1280px) 50vw"
+                />
+              </div>
+            ) : (
+              <IoPersonCircle className="w-5 h-5" />
+            )}
             <p className="text-sm">{author.name}</p>
           </div>
         )}

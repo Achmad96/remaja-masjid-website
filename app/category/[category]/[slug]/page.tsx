@@ -20,7 +20,7 @@ export default async function Page({ params }: PageProps) {
   )) as ArticlePageType;
   if (!article || !markdown) return notFound();
   const res = await getBlurDataImage(article.cover);
-  if (!res) {
+  if (!res || !article.cover) {
     return (
       <main className="min-h-dvh h-auto w-full">
         <h1 className="mt-7 text-5xl max-sm:text-4xl">{article.title}</h1>
@@ -57,7 +57,7 @@ export default async function Page({ params }: PageProps) {
         </div>
       </div>
       <div className="flex h-auto w-full items-center justify-center">
-        <article className="prose prose-p:text-justify mx-auto mb-10 max-w-[80%]">
+        <article className="prose mx-auto mb-10 max-w-[80%]">
           {markdown.parent ? (
             <Markdown>{markdown.parent}</Markdown>
           ) : (

@@ -45,11 +45,12 @@ const getAndTransformPageToArticleForm = async (
 
   return {
     id: page.id as string,
-    cover: !page.cover
-      ? ''
-      : page.cover.type === 'file'
-      ? (page.cover.file.url as string)
-      : (page.cover.external.url as string),
+    cover:
+      !page && !page.cover
+        ? ''
+        : page.cover.type === 'file'
+        ? (page.cover.file.url as string)
+        : (page.cover.external.url as string),
     title: Title.title[0].plain_text as string,
     description: formatDescription(Description) as string,
     author: await getAuthorById(Author.people[0].id),
