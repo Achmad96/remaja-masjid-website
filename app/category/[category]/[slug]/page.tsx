@@ -6,6 +6,7 @@ import { getSingleArticlePage } from '@/utils/notion-service';
 import type { ArticlePageType, ArticleType } from '@/app/types';
 
 import Markdown from 'react-markdown';
+import AuthorBadge from '@/components/AuthorBadge';
 
 export const revalidate = 600; // revalidate the data every 10 minutes
 export const dynamicParams = true;
@@ -20,26 +21,9 @@ export default async function Page({ params }: PageProps) {
   )) as ArticlePageType;
   if (!article || !markdown) return notFound();
   const res = await getBlurDataImage(article.cover);
-  if (!res || !article.cover) {
-    return (
-      <main className="min-h-dvh h-auto w-full">
-        <h1 className="mt-7 text-5xl max-sm:text-4xl">{article.title}</h1>
-        <p>Terakhir update per tanggal {article.updatedAt}</p>
-        <div className="flex h-auto w-full items-center justify-center">
-          <article className="prose mx-auto mb-10 max-w-[80%]">
-            {markdown.parent ? (
-              <Markdown>{markdown.parent}</Markdown>
-            ) : (
-              <p>The content doesn't exist</p>
-            )}
-          </article>
-        </div>
-      </main>
-    );
-  }
   const { img, base64 } = res as BlurResponseType;
   return (
-    <main className="min-h-dvh h-auto w-full mt-10">
+    <main className="min-h-[88dvh] h-auto w-full mt-10">
       <div className="mb-10 flex w-full flex-col gap-3 max-sm:pl-5">
         <div className="h-auto w-[80%] mx-auto">
           <Image
@@ -54,6 +38,7 @@ export default async function Page({ params }: PageProps) {
         <div className="ml-[10%] flex flex-col gap-3">
           <h1 className="mt-7 text-5xl max-sm:text-4xl">{article.title}</h1>
           <p>Terakhir update per tanggal {article.updatedAt}</p>
+          <AuthorBadge author={article.author} />
         </div>
       </div>
       <div className="flex h-auto w-full items-center justify-center">

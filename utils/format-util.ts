@@ -1,14 +1,25 @@
 function formatDescription(description: any): string {
-  const currentDescription = description.rich_text
+  description = description.rich_text
     .map((word: any) => word.plain_text)
     .join('');
-  const currentDescriptionSplitted = currentDescription.split(' ');
-  if (currentDescriptionSplitted.length > 30) {
-    const first30Words = currentDescriptionSplitted.slice(0, 30).join(' ');
-    return first30Words + '...';
+  const words = description.split(' ');
+  const wordLimit = 30,
+    charLimit = 200;
+
+  let truncatedDescription;
+  if (words.length > wordLimit) {
+    truncatedDescription = words.slice(0, wordLimit).join(' ') + '...';
+  } else {
+    truncatedDescription = description;
   }
 
-  return currentDescription;
+  if (truncatedDescription.length > charLimit) {
+    const truncatedByChars = truncatedDescription.slice(0, charLimit);
+    const lastSpaceIndex = truncatedByChars.lastIndexOf(' ');
+    truncatedDescription = truncatedByChars.slice(0, lastSpaceIndex) + '...';
+  }
+
+  return truncatedDescription;
 }
 
 function formatDate(date: string): string {
