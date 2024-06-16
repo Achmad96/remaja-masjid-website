@@ -34,7 +34,7 @@ export default async function Page({ params }: PageProps) {
             loading="lazy"
             blurDataURL={base64}
             placeholder="blur"
-            className="h-96 w-full rounded-3xl"
+            className="h-96 w-full rounded-3xl border"
           />
         </div>
         <div className="ml-[10%] flex flex-col gap-3">
