@@ -1,4 +1,4 @@
-import { MdStringObject } from 'notion-to-md/build/types';
+import { MdStringObject } from "notion-to-md/build/types";
 
 type ArticleType = {
   id: string;
@@ -24,4 +24,10 @@ type AuthorType = {
   avatar: string;
 };
 
-export type { ArticlePageType, ArticleType, AuthorType };
+type ArticleResponseType = {
+  articles: ArticleType[];
+  hasMore: boolean;
+  nextCursor: string | null;
+};
+
+export type { AuthorType, ArticleResponseType, ArticleType, ArticlePageType };

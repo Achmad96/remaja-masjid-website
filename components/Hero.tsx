@@ -1,14 +1,13 @@
-import { PhotoComponent, PhotoSkeleton } from '@/components/PhotoComponent';
+import PhotoComponent from "@/components/PhotoComponent";
 
-import HeroContent from '@/components/HeroContent';
+import HeroContent from "@/components/HeroContent";
+import Container from "@/components/Container";
 
 export default async function Hero() {
   return (
-    <section>
-      <div className="min-h-[88dvh] w-full relative flex justify-center items-center">
-        <PhotoComponent />
-        <HeroContent />
-      </div>
-    </section>
+    <Container className="relative flex items-center justify-center">
+      <PhotoComponent />
+      <HeroContent />
+    </Container>
   );
 }

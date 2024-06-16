@@ -1,31 +1,31 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import Navbar from '@/components/Navbar';
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
 
-import './globals.css';
-import NextProgressBar from '@/components/NextProgressBar';
+import Navbar from "@/components/Navbar";
+import NextProgressBar from "@/components/NextProgressBar";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
-  title: 'Remas Nurul Haqq',
-  description: 'Website Remaja Masjid Nurul Haqq',
+  title: "Remas Nurul Haqq",
+  description: "Website Remaja Masjid Nurul Haqq",
   icons: {
-    icon: '/favicon.ico',
-    apple: '/favicon.ico'
-  }
+    icon: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <NextProgressBar />
         <Navbar />
         {children}
-        <NextProgressBar />
       </body>
     </html>
   );

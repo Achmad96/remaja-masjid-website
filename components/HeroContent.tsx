@@ -1,48 +1,48 @@
-'use client';
-import { Variants, motion } from 'framer-motion';
+"use client";
+import { Variants, motion } from "framer-motion";
 
 const itemVariant: Variants = {
   open: {
     opacity: 1,
-    y: '0%',
-    transition: { type: 'spring', stiffness: 300, damping: 50 }
+    y: "0%",
+    transition: { type: "spring", stiffness: 300, damping: 50 },
   },
-  closed: { opacity: 0, y: '100%' }
+  closed: { opacity: 0, y: "100%" },
 };
 
 export default function HeroContent() {
   return (
     <motion.div
-      initial={'closed'}
-      animate={'open'}
+      initial={"closed"}
+      animate={"open"}
       variants={{
         open: {
           opacity: 1,
-          y: '0%',
+          y: "0%",
           transition: {
-            type: 'spring',
+            type: "spring",
             bounce: 0,
             duration: 0.3,
             delayChildren: 0.2,
-            staggerChildren: 0.3
-          }
+            staggerChildren: 0.3,
+          },
         },
 
         closed: {
           opacity: 0,
-          y: '100%',
+          y: "100%",
           transition: {
-            type: 'spring',
+            type: "spring",
             bounce: 0,
-            duration: 0.3
-          }
-        }
+            duration: 0.3,
+          },
+        },
       }}
-      className="absolute z-40 text-white text-center flex flex-col gap-5 overflow-hidden"
+      className="absolute z-40 flex flex-col gap-5 overflow-hidden text-center text-white"
     >
       <motion.h1
         variants={itemVariant}
-        className="text-5xl max-sm:text-2xl font-bold text-white"
+        className="text-5xl font-bold text-white max-sm:text-2xl"
       >
         Remaja Masjid Nurul HAQQ
       </motion.h1>

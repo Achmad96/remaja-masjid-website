@@ -1,5 +1,5 @@
-'use client';
-import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
+"use client";
+import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 
 export default function NextProgressBar() {
   return (

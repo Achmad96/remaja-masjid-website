@@ -1,12 +1,14 @@
-import Image from 'next/image';
-import { type BlurResponseType, getBlurDataImage } from '@/app/actions';
+import { type BlurResponseType, getBlurDataImage } from "@/app/actions";
+import type { ArticlePageType, ArticleType } from "@/app/types";
 
-import { notFound } from 'next/navigation';
-import { getSingleArticlePage } from '@/utils/notion-service';
-import type { ArticlePageType, ArticleType } from '@/app/types';
+import { notFound } from "next/navigation";
+import { getSingleArticlePage } from "@/utils/notion-service";
 
-import Markdown from 'react-markdown';
-import AuthorBadge from '@/components/AuthorBadge';
+import Image from "next/image";
+
+import Markdown from "react-markdown";
+import AuthorBadge from "@/components/AuthorBadge";
+import Container from "@/components/Container";
 
 export const revalidate = 600; // revalidate the data every 10 minutes
 export const dynamicParams = true;
@@ -17,15 +19,15 @@ interface PageProps {
 
 export default async function Page({ params }: PageProps) {
   const { article, markdown } = (await getSingleArticlePage(
-    params.slug
+    params.slug,
   )) as ArticlePageType;
   if (!article || !markdown) return notFound();
   const res = await getBlurDataImage(article.cover);
   const { img, base64 } = res as BlurResponseType;
   return (
-    <main className="min-h-[88dvh] h-auto w-full mt-10">
+    <Container className="mt-10">
       <div className="mb-10 flex w-full flex-col gap-3 max-sm:pl-5">
-        <div className="h-auto w-[80%] mx-auto">
+        <div className="mx-auto h-auto w-[80%]">
           <Image
             {...img}
             alt="cover"
@@ -37,7 +39,7 @@ export default async function Page({ params }: PageProps) {
         </div>
         <div className="ml-[10%] flex flex-col gap-3">
           <h1 className="mt-7 text-5xl max-sm:text-4xl">{article.title}</h1>
-          <p>Terakhir update per tanggal {article.updatedAt}</p>
+          <p>Terakhir update pada tanggal {article.updatedAt}</p>
           <AuthorBadge author={article.author} />
         </div>
       </div>
@@ -50,17 +52,17 @@ export default async function Page({ params }: PageProps) {
           )}
         </article>
       </div>
-    </main>
+    </Container>
   );
 }
 
 export const generateMetadata = async ({
-  params
+  params,
 }: {
   params: { slug: string };
 }) => {
   const { article }: { article: ArticleType } = (await getSingleArticlePage(
-    params.slug
+    params.slug,
   )) as { article: ArticleType };
   if (!article) notFound();
   return { title: `Artikel - ${article.title}` };

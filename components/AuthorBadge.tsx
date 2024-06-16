@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import { AuthorType } from '@/app/types';
-import { IoPersonCircle } from 'react-icons/io5';
+import Image from "next/image";
+import { AuthorType } from "@/app/types";
+import { IoPersonCircle } from "react-icons/io5";
 
 interface IAuthorBadge {
   author: AuthorType;
@@ -10,7 +10,7 @@ export default function AuthorBadge({ author }: IAuthorBadge) {
   return (
     <div className="flex items-center gap-2">
       {author.avatar ? (
-        <div className="relative w-5 h-5">
+        <div className="relative h-8 w-8">
           <Image
             className="rounded-full"
             src={author.avatar}
@@ -20,7 +20,7 @@ export default function AuthorBadge({ author }: IAuthorBadge) {
           />
         </div>
       ) : (
-        <IoPersonCircle className="w-10 h-10" />
+        <IoPersonCircle className="h-8 w-8" />
       )}
       <p className="text-base">{author.name}</p>
     </div>
