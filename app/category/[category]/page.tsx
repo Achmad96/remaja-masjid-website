@@ -10,6 +10,7 @@ interface IPage {
     category: string;
   };
   searchParams: {
+    prevCursor: string;
     startCursor: string;
   };
 }
@@ -42,7 +43,11 @@ export default async function Page({ params, searchParams }: IPage) {
           <ArticleCard key={article.id} article={article} />
         ))}
       </main>
-      <PaginationComponent nextCursor={nextCursor} hasMore={hasMore} />
+      <PaginationComponent
+        prevCursor={articles[0].id}
+        nextCursor={nextCursor}
+        hasMore={hasMore}
+      />
     </Container>
   );
 }

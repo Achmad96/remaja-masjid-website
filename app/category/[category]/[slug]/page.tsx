@@ -48,7 +48,7 @@ export default async function Page({ params }: PageProps) {
           {markdown.parent ? (
             <Markdown>{markdown.parent}</Markdown>
           ) : (
-            <p>The content doesn't exist</p>
+            <p>Tidak ada isinya untuk saat ini.</p>
           )}
         </article>
       </div>

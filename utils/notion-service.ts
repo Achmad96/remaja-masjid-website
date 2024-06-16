@@ -91,9 +91,6 @@ const getArticlesByCategory = cache(
     const articles = await Promise.all(
       response.results.map(getAndTransformPageToArticleForm),
     );
-
-    console.log(response);
-
     return {
       articles,
       hasMore: response.has_more,
@@ -126,7 +123,6 @@ const getSingleArticlePage = cache(async (slug: string) => {
   if (!response.results[0]) {
     return { error: "Sorry, there was an error" };
   }
-
   const page = response.results[0];
   const mdBlocks = await notionToMarkdown.pageToMarkdown(page.id);
   const markdown = notionToMarkdown.toMarkdownString(mdBlocks);

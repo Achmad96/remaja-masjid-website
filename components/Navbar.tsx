@@ -19,7 +19,7 @@ export default async function Navbar() {
       <div className="flex-none">
         <ul className="menu menu-horizontal gap-7 px-1">
           <li>
-            <Link href={"/profil"} className="text-base text-white">
+            <Link href={"/profile"} className="text-base text-white">
               Profil
             </Link>
           </li>
