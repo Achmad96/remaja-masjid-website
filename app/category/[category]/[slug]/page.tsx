@@ -34,11 +34,11 @@ export default async function Page({ params }: PageProps) {
             loading="lazy"
             blurDataURL={base64}
             placeholder="blur"
-            className="h-96 w-full rounded-3xl border"
+            className="h-96 w-full rounded-3xl border-2"
           />
         </div>
-        <div className="ml-[10%] flex flex-col gap-3">
-          <h1 className="mt-7 text-5xl max-sm:text-4xl">{article.title}</h1>
+        <div className="ml-[10%] flex flex-col gap-3 max-sm:ml-[5%] max-sm:w-[90%]">
+          <h1 className="mt-7 text-5xl max-sm:text-3xl">{article.title}</h1>
           <p>Terakhir update pada tanggal {article.updatedAt}</p>
           <AuthorBadge author={article.author} />
         </div>
