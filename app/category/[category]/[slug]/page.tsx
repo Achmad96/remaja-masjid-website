@@ -27,7 +27,7 @@ export default async function Page({ params }: PageProps) {
   return (
     <Container className="mt-10">
       <div className="mb-10 flex w-full flex-col gap-3 max-sm:pl-5">
-        <div className="mx-auto h-auto w-[80%]">
+        <div className="mx-auto h-auto w-[80%] max-md:w-[90%]">
           <Image
             {...img}
             alt="cover"
