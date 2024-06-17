@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { ArticleType } from "@/app/types";
-import { BlurResponseType, getBlurDataImage } from "@/app/actions";
+import { BlurImageDataType, getBlurImageData } from "@/app/actions";
 
 interface IArticleCard {
   article: ArticleType;
@@ -10,8 +10,8 @@ interface IArticleCard {
 
 export default async function ArticleCard({ article }: IArticleCard) {
   const { title, description, slug, category, cover, createdAt } = article;
-  const blurDataImage = await getBlurDataImage(cover);
-  const { img, base64 } = blurDataImage as BlurResponseType;
+  const BlurImageData = await getBlurImageData(cover);
+  const { img, base64 } = BlurImageData as BlurImageDataType;
   return (
     <Link
       href={`/category/${category.toLowerCase()}/${slug}`}

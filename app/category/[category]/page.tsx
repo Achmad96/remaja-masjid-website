@@ -15,7 +15,7 @@ interface IPage {
   };
 }
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 6; // Maximum number of articles per page
 export const revalidate = 600; // revalidate every 10 minutes
 export const dynamicParams = true;
 

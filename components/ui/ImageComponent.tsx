@@ -1,4 +1,4 @@
-import { BlurResponseType } from "@/app/actions";
+import { BlurImageDataType } from "@/app/actions";
 import Image from "next/image";
 
 interface ImageContainerInterface {
@@ -35,10 +35,10 @@ function ImageWithoutBlurData({
 }
 interface ImageComponentInterface {
   className: string;
-  blurDataImage: BlurResponseType;
+  blurImageData: BlurImageDataType;
 }
-function ImageComponent({ className, blurDataImage }: ImageComponentInterface) {
-  const { img, base64 } = blurDataImage;
+function ImageComponent({ className, blurImageData }: ImageComponentInterface) {
+  const { img, base64 } = blurImageData;
   return (
     <Image
       {...img}

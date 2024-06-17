@@ -1,7 +1,7 @@
 import "server-only";
 import { getPlaiceholder } from "plaiceholder";
 
-export type BlurResponseType = {
+export type BlurImageDataType = {
   message: string;
   img: {
     src: string;
@@ -29,7 +29,7 @@ export type BlurResponseType = {
   }[][];
 };
 
-export async function getBlurDataImage(src: string) {
+export async function getBlurImageData(src: string) {
   if (!src) return { message: "Error, source not founded" };
   const buffer = await fetch(src).then(async (res) =>
     Buffer.from(await res.arrayBuffer()),
