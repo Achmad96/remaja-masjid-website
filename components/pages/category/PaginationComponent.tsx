@@ -1,7 +1,7 @@
 "use client";
-import { ArticleType } from "@/app/types";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { ArticleType } from "@/app/types";
 
 interface IPaginationComponents {
   category: string;
@@ -10,7 +10,8 @@ interface IPaginationComponents {
   hasMore: boolean;
 }
 
-const prevCursorsName = "previousCursors";
+const PREV_CURSORS_NAME = "previousCursors";
+
 export default function PaginationComponent({
   category,
   articles,
@@ -18,54 +19,57 @@ export default function PaginationComponent({
   hasMore,
 }: IPaginationComponents) {
   const router = useRouter();
-  const startCursorArticle = articles[0].id;
+  const startCursorArticle = articles[0]?.id || "";
   const [prevCursors, setPrevCursors] = useState<string[]>([]);
+
   useEffect(() => {
     if (!window) return;
-    const data = JSON.parse(
-      localStorage.getItem(prevCursorsName) as string,
-    ) as string[];
-    if (!data) {
-      localStorage.setItem(prevCursorsName, "[]");
-      return;
-    }
-    setPrevCursors((prev) => [...prev, ...data]);
+    const storedCursors = localStorage.getItem(PREV_CURSORS_NAME);
+    const data = storedCursors ? JSON.parse(storedCursors) : [];
+    setPrevCursors(data);
+
     const handleDelete = () => {
-      localStorage.setItem(prevCursorsName, "[]");
+      localStorage.setItem(PREV_CURSORS_NAME, "[]");
     };
+
     window.addEventListener("beforeunload", handleDelete);
     return () => window.removeEventListener("beforeunload", handleDelete);
   }, []);
 
   useEffect(() => {
-    setPrevCursors([]); // call this for clear the previous cursors
-    localStorage.setItem(prevCursorsName, "[]");
+    setPrevCursors([]);
+    localStorage.setItem(PREV_CURSORS_NAME, "[]");
   }, [category]);
 
   useEffect(() => {
-    localStorage.setItem(prevCursorsName, JSON.stringify(prevCursors));
+    localStorage.setItem(PREV_CURSORS_NAME, JSON.stringify(prevCursors));
   }, [prevCursors]);
+
+  const handlePreviousClick = () => {
+    const lastIndex = prevCursors.length - 1;
+    router.replace(`?startCursor=${prevCursors[lastIndex]}`);
+    setPrevCursors((prev) => prev.slice(0, lastIndex));
+  };
+
+  const handleNextClick = () => {
+    if (prevCursors.includes(startCursorArticle)) return;
+    setPrevCursors((prev) => [...prev, startCursorArticle]);
+    router.replace(`?startCursor=${nextCursor}`);
+  };
+
   return (
     <div className="join grid grid-cols-2">
       <button
         disabled={prevCursors.length < 1}
         className={`btn btn-outline join-item ${prevCursors.length < 1 && "btn-disabled"}`}
-        onClick={() => {
-          const lastIndex = prevCursors.length - 1;
-          router.replace(`?startCursor=${prevCursors[lastIndex]}`);
-          setPrevCursors((prev) => prev.slice(0, lastIndex));
-        }}
+        onClick={handlePreviousClick}
       >
         Previous
       </button>
       <button
         className={`btn btn-outline join-item ${!hasMore && "btn-disabled"}`}
         disabled={!hasMore}
-        onClick={() => {
-          if (prevCursors.includes(startCursorArticle)) return;
-          setPrevCursors((prev) => [...prev, startCursorArticle]);
-          router.replace(`?startCursor=${nextCursor}`);
-        }}
+        onClick={handleNextClick}
       >
         Next
       </button>

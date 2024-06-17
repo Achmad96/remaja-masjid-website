@@ -29,8 +29,10 @@ export type BlurImageDataType = {
   }[][];
 };
 
-export async function getBlurImageData(src: string) {
-  if (!src) return { message: "Error, source not founded" };
+export async function getBlurImageData(
+  src: string,
+): Promise<BlurImageDataType | null> {
+  if (!src) return null;
   const buffer = await fetch(src).then(async (res) =>
     Buffer.from(await res.arrayBuffer()),
   );

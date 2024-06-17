@@ -5,7 +5,7 @@ import type { ArticlePageType, ArticleType } from "@/app/types";
 import { getSingleArticlePage } from "@/utils/notion-service";
 import { type BlurImageDataType, getBlurImageData } from "@/app/actions";
 
-import { ImageComponent, ImageContainer } from "@/components/ui/ImageComponent";
+import { ImageWithBlur, ImageContainer } from "@/components/ui/ImageComponent";
 
 import AuthorBadge from "@/components/ui/AuthorBadge";
 import Container from "@/components/ui/Container";
@@ -26,18 +26,20 @@ function HeaderArticleSection({
   article: ArticleType;
   blurImageData: BlurImageDataType;
 }) {
+  const { title, author, updatedAt } = article;
   return (
     <section className="mb-10 flex w-full flex-col gap-3 max-sm:pl-5">
       <ImageContainer className={"mx-auto h-auto w-[80%] max-md:w-[90%]"}>
-        <ImageComponent
+        <ImageWithBlur
+          alt={"header-image"}
           className={"h-96 w-full rounded-3xl border-2"}
-          blurImageData={blurImageData as BlurImageDataType}
+          blurImageData={blurImageData}
         />
       </ImageContainer>
       <div className="ml-[10%] flex flex-col gap-3 max-sm:ml-[5%] max-sm:w-[90%]">
-        <h1 className="mt-7 text-5xl max-sm:text-3xl">{article.title}</h1>
-        <p>Terakhir update pada tanggal {article.updatedAt}</p>
-        <AuthorBadge author={article.author} />
+        <h1 className="mt-7 text-5xl max-sm:text-3xl">{title}</h1>
+        <p>Terakhir update pada tanggal {updatedAt}</p>
+        <AuthorBadge author={author} />
       </div>
     </section>
   );

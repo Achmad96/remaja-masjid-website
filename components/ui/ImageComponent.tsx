@@ -9,19 +9,15 @@ function ImageContainer({ children, className }: ImageContainerInterface) {
   return <div className={className}>{children}</div>;
 }
 
-interface ImageWithoutBlurDataInterface {
+interface ImageWithoutBlurInterface {
   src: string;
   alt: string;
   sizes: string;
   className?: string;
 }
 
-function ImageWithoutBlurData({
-  src,
-  alt,
-  sizes,
-  className = "",
-}: ImageWithoutBlurDataInterface) {
+function ImageWithoutBlur(props: ImageWithoutBlurInterface) {
+  const { src, alt, sizes, className } = props;
   return (
     <Image
       src={src}
@@ -33,22 +29,30 @@ function ImageWithoutBlurData({
     />
   );
 }
-interface ImageComponentInterface {
-  className: string;
+interface ImageWithBlurInterface {
   blurImageData: BlurImageDataType;
+  alt: string;
+  className?: string;
+  style?: React.CSSProperties;
 }
-function ImageComponent({ className, blurImageData }: ImageComponentInterface) {
+function ImageWithBlur(props: ImageWithBlurInterface) {
+  const { alt, className, blurImageData, style } = props;
+  if (!blurImageData) return;
   const { img, base64 } = blurImageData;
   return (
     <Image
       {...img}
-      alt="cover"
+      alt={alt}
       loading="lazy"
-      blurDataURL={base64}
       placeholder="blur"
+      blurDataURL={base64}
+      style={{
+        maxWidth: "100%",
+        ...style,
+      }}
       className={className}
     />
   );
 }
 
-export { ImageWithoutBlurData, ImageComponent, ImageContainer };
+export { ImageWithoutBlur, ImageWithBlur, ImageContainer };
