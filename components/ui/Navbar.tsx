@@ -2,17 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { getCategories } from "@/utils/notion-service";
+import { ImageWithoutBlurData } from "@/components/ui/ImageComponent";
 
 export default async function Navbar() {
   const categories = await getCategories();
   return (
     <nav className="navbar z-[100] h-[12dvh] justify-between bg-[#55AD9B] px-7">
       <Link href={"/"} className="btn btn-ghost relative h-[3.5rem] w-16">
-        <Image
+        <ImageWithoutBlurData
           src={"/logo.png"}
           alt="logo"
-          fill={true}
-          priority={true}
           sizes="(max-width: 640px) 50vw, (max-width: 768px) 50vw, (max-width: 1024px) 60vw, (max-width: 1280px) 60vw"
         />
       </Link>

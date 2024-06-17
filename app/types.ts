@@ -7,8 +7,8 @@ type ArticleType = {
   author: AuthorType;
   published: boolean;
   cover: string;
-  slug: string;
   category: string;
+  slug: string;
   createdAt: string;
   updatedAt: string;
 };

@@ -1,9 +1,9 @@
 import type { ArticleResponseType } from "@/app/types";
 import { getArticlesByCategory } from "@/utils/notion-service";
 
-import Container from "@/components/Container";
-import ArticleCard from "@/components/ArticleCard";
-import PaginationComponent from "@/components/PaginationComponent";
+import Container from "@/components/ui/Container";
+import ArticleCard from "@/components/pages/category/ArticleCard";
+import PaginationComponent from "@/components/pages/category/PaginationComponent";
 
 interface IPage {
   params: {
@@ -17,6 +17,17 @@ interface IPage {
 
 const ITEMS_PER_PAGE = 6;
 export const revalidate = 600; // revalidate every 10 minutes
+export const dynamicParams = true;
+
+function EmptyArticle({ category }: { category: string }) {
+  return (
+    <Container className="flex flex-col items-center justify-center">
+      <h1 className="text-3xl">Kategori {category}</h1>
+      <p>Maaf, belum ada artikel untuk saat ini...</p>
+    </Container>
+  );
+}
+
 export default async function Page({ params, searchParams }: IPage) {
   const { startCursor } = searchParams;
   const category = params.category.replace(/\b./g, function (c) {
@@ -28,14 +39,7 @@ export default async function Page({ params, searchParams }: IPage) {
     ITEMS_PER_PAGE,
   )) as ArticleResponseType;
   const { articles, nextCursor, hasMore } = response;
-  if (!articles.length) {
-    return (
-      <section className="flex min-h-[88dvh] w-full flex-col items-center justify-center">
-        <h1 className="text-3xl">Kategori {category}</h1>
-        <p>Maaf, belum ada artikel untuk saat ini...</p>
-      </section>
-    );
-  }
+  if (!articles.length) return <EmptyArticle category={category} />;
   return (
     <Container className="my-10 flex flex-col items-center gap-3 max-sm:flex-col">
       <h1 className="text-3xl">Kategori {category}</h1>
