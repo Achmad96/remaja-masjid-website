@@ -48,6 +48,7 @@ export default async function Page({ params, searchParams }: IPage) {
         ))}
       </main>
       <PaginationComponent
+        category={category}
         articles={articles}
         nextCursor={nextCursor}
         hasMore={hasMore}

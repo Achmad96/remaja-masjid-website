@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface IPaginationComponents {
+  category: string;
   articles: ArticleType[];
   nextCursor: string | null;
   hasMore: boolean;
@@ -11,6 +12,7 @@ interface IPaginationComponents {
 
 const prevCursorsName = "previousCursors";
 export default function PaginationComponent({
+  category,
   articles,
   nextCursor,
   hasMore,
@@ -23,13 +25,23 @@ export default function PaginationComponent({
     const data = JSON.parse(
       localStorage.getItem(prevCursorsName) as string,
     ) as string[];
+    if (!data) {
+      localStorage.setItem(prevCursorsName, "[]");
+      return;
+    }
     setPrevCursors((prev) => [...prev, ...data]);
-    const handleDelete = (_: BeforeUnloadEvent) => {
+    const handleDelete = () => {
       localStorage.setItem(prevCursorsName, "[]");
     };
     window.addEventListener("beforeunload", handleDelete);
     return () => window.removeEventListener("beforeunload", handleDelete);
   }, []);
+
+  useEffect(() => {
+    setPrevCursors([]); // call this for clear the previous cursors
+    localStorage.setItem(prevCursorsName, "[]");
+  }, [category]);
+
   useEffect(() => {
     localStorage.setItem(prevCursorsName, JSON.stringify(prevCursors));
   }, [prevCursors]);
