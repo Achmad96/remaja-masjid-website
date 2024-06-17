@@ -9,7 +9,7 @@ interface IPaginationComponents {
   hasMore: boolean;
 }
 
-const previousCursorsName = "previousCursors";
+const prevCursorsName = "previous_cursors";
 export default function PaginationComponent({
   articles,
   nextCursor,
@@ -17,37 +17,41 @@ export default function PaginationComponent({
 }: IPaginationComponents) {
   const router = useRouter();
   const startCursorArticle = articles[0].id;
-  const [prevCursor, setPrevCursor] = useState<string[]>([]);
+  const [prevCursors, setPrevCursors] = useState<string[]>([]);
   useEffect(() => {
     if (!window) return;
+    const data = JSON.parse(
+      localStorage.getItem(prevCursorsName) as string,
+    ) as string[];
+    setPrevCursors((prev) => [...prev, ...data]);
     const handleDelete = (_: BeforeUnloadEvent) => {
-      localStorage.setItem(previousCursorsName, `[]`);
+      localStorage.setItem(prevCursorsName, `[]`);
     };
     window.addEventListener("beforeunload", handleDelete);
     return () => window.removeEventListener("beforeunload", handleDelete);
   }, []);
-
   useEffect(() => {
-    localStorage.setItem(previousCursorsName, JSON.stringify(prevCursor));
-  }, [prevCursor]);
+    localStorage.setItem(prevCursorsName, JSON.stringify(prevCursors));
+  }, [prevCursors]);
   return (
     <div className="join grid grid-cols-2">
       <button
-        className={`btn btn-outline join-item ${prevCursor.length < 1 && "btn-disabled"}`}
+        disabled={prevCursors.length < 1}
+        className={`btn btn-outline join-item ${prevCursors.length < 1 && "btn-disabled"}`}
         onClick={() => {
-          if (prevCursor.length < 1) return;
-          const lastIndex = prevCursor.length - 1;
-          router.replace(`?startCursor=${prevCursor[lastIndex]}`);
-          setPrevCursor((prev) => prev.slice(0, lastIndex));
+          const lastIndex = prevCursors.length - 1;
+          router.replace(`?startCursor=${prevCursors[lastIndex]}`);
+          setPrevCursors((prev) => prev.slice(0, lastIndex));
         }}
       >
         Previous
       </button>
       <button
         className={`btn btn-outline join-item ${!hasMore && "btn-disabled"}`}
+        disabled={!hasMore}
         onClick={() => {
-          if (!hasMore) return;
-          setPrevCursor((prev) => [...prev, startCursorArticle]);
+          if (prevCursors.includes(startCursorArticle)) return;
+          setPrevCursors((prev) => [...prev, startCursorArticle]);
           router.replace(`?startCursor=${nextCursor}`);
         }}
       >

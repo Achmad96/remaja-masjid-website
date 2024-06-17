@@ -41,7 +41,10 @@ export default function ProfileHeroContent() {
       variants={parentVariant}
       className="flex flex-col gap-2"
     >
-      <motion.h2 variants={childVariant} className="text-3xl font-bold">
+      <motion.h2
+        variants={childVariant}
+        className="text-3xl font-bold max-sm:text-2xl"
+      >
         Remaja Masjid Nurul Haqq
       </motion.h2>
       <motion.p
