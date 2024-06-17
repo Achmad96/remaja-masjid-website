@@ -9,7 +9,7 @@ interface IPaginationComponents {
   hasMore: boolean;
 }
 
-const prevCursorsName = "previous_cursors";
+const prevCursorsName = "previousCursors";
 export default function PaginationComponent({
   articles,
   nextCursor,
@@ -25,7 +25,7 @@ export default function PaginationComponent({
     ) as string[];
     setPrevCursors((prev) => [...prev, ...data]);
     const handleDelete = (_: BeforeUnloadEvent) => {
-      localStorage.setItem(prevCursorsName, `[]`);
+      localStorage.setItem(prevCursorsName, "[]");
     };
     window.addEventListener("beforeunload", handleDelete);
     return () => window.removeEventListener("beforeunload", handleDelete);
