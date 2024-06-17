@@ -4,6 +4,7 @@ import { getArticlesByCategory } from "@/utils/notion-service";
 import Container from "@/components/ui/Container";
 import ArticleCard from "@/components/pages/category/ArticleCard";
 import PaginationComponent from "@/components/pages/category/PaginationComponent";
+import { formatCategory } from "@/utils/format-util";
 
 interface IPage {
   params: {
@@ -30,9 +31,7 @@ function EmptyArticle({ category }: { category: string }) {
 
 export default async function Page({ params, searchParams }: IPage) {
   const { startCursor } = searchParams;
-  const category = params.category.replace(/\b./g, function (c) {
-    return c.toUpperCase();
-  });
+  const category = formatCategory(params.category);
   const response = (await getArticlesByCategory(
     category,
     startCursor || undefined,

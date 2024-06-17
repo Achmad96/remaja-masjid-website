@@ -1,7 +1,12 @@
 import { Client } from "@notionhq/client";
 import { cache } from "react";
 import { NotionToMarkdown } from "notion-to-md";
-import { ArticleResponseType, ArticleType, AuthorType } from "@/app/types";
+import {
+  ArticlePageType,
+  ArticleResponseType,
+  ArticleType,
+  AuthorType,
+} from "@/app/types";
 import { formatDate, formatDescription } from "@/utils/format-util";
 
 const API_KEY = process.env.NEXT_PUBLIC_NOTION_API_KEY as string;
@@ -99,39 +104,41 @@ const getArticlesByCategory = cache(
   },
 );
 
-const getSingleArticlePage = cache(async (slug: string) => {
-  const response = await client.databases.query({
-    database_id: DATABASE_ID,
-    filter: {
-      and: [
-        {
-          property: "Slug",
-          rich_text: {
-            equals: slug,
+const getSingleArticlePage = cache(
+  async (slug: string): Promise<ArticlePageType> => {
+    const response = await client.databases.query({
+      database_id: DATABASE_ID,
+      filter: {
+        and: [
+          {
+            property: "Slug",
+            rich_text: {
+              equals: slug,
+            },
           },
-        },
-        {
-          property: "Published",
-          checkbox: {
-            equals: true,
+          {
+            property: "Published",
+            checkbox: {
+              equals: true,
+            },
           },
-        },
-      ],
-    },
-  });
+        ],
+      },
+    });
 
-  if (!response.results[0]) {
-    return { error: "Sorry, there was an error" };
-  }
-  const page = response.results[0];
-  const mdBlocks = await notionToMarkdown.pageToMarkdown(page.id);
-  const markdown = notionToMarkdown.toMarkdownString(mdBlocks);
-  const article = await getAndTransformPageToArticleForm(page);
-  return {
-    article,
-    markdown,
-  };
-});
+    if (!response.results[0]) {
+      throw new Error("Sorry, there was an error");
+    }
+    const page = response.results[0];
+    const mdBlocks = await notionToMarkdown.pageToMarkdown(page.id);
+    const markdown = notionToMarkdown.toMarkdownString(mdBlocks);
+    const article = await getAndTransformPageToArticleForm(page);
+    return {
+      article,
+      markdown,
+    };
+  },
+);
 
 export {
   getAuthorById,

@@ -9,6 +9,7 @@ import { ImageComponent, ImageContainer } from "@/components/ui/ImageComponent";
 
 import AuthorBadge from "@/components/ui/AuthorBadge";
 import Container from "@/components/ui/Container";
+
 import { MdStringObject } from "notion-to-md/build/types";
 
 export const revalidate = 600; // revalidate the data every 10 minutes
