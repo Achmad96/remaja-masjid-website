@@ -18,12 +18,13 @@ interface IPage {
 const ITEMS_PER_PAGE = 6;
 export const revalidate = 600; // revalidate every 10 minutes
 export default async function Page({ params, searchParams }: IPage) {
+  const { startCursor } = searchParams;
   const category = params.category.replace(/\b./g, function (c) {
     return c.toUpperCase();
   });
   const response = (await getArticlesByCategory(
     category,
-    searchParams.startCursor || undefined,
+    startCursor || undefined,
     ITEMS_PER_PAGE,
   )) as ArticleResponseType;
   const { articles, nextCursor, hasMore } = response;
@@ -44,7 +45,7 @@ export default async function Page({ params, searchParams }: IPage) {
         ))}
       </main>
       <PaginationComponent
-        prevCursor={articles[0].id}
+        articles={articles}
         nextCursor={nextCursor}
         hasMore={hasMore}
       />
