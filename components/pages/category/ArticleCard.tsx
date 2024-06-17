@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import { ArticleType } from "@/app/types";
 import { BlurImageDataType, getBlurImageData } from "@/app/actions";
+import { Suspense } from "react";
 
 interface IArticleCard {
   article: ArticleType;
@@ -10,21 +11,24 @@ interface IArticleCard {
 
 export default async function ArticleCard({ article }: IArticleCard) {
   const { title, description, slug, category, cover, createdAt } = article;
-  const BlurImageData = await getBlurImageData(cover);
-  const { img, base64 } = BlurImageData as BlurImageDataType;
+  const blurImageData = await getBlurImageData(cover);
+  const { img, base64 } = blurImageData as BlurImageDataType;
   return (
     <Link
       href={`/category/${category.toLowerCase()}/${slug}`}
       className="card card-compact h-[32rem] w-96 max-w-96 rounded-lg border bg-base-100 shadow-2xl"
     >
-      <figure className="relative h-80">
+      <figure>
         <Image
-          src={img.src}
+          {...img}
           alt={title}
-          fill={true}
+          loading="lazy"
           blurDataURL={base64}
           placeholder="blur"
-          sizes="(max-width: 640px) 60vw, (max-width: 768px) 60vw, (max-width: 1024px) 80vw, (max-width: 1280px) 100vw"
+          style={{
+            maxWidth: "100%",
+            height: "20rem",
+          }}
         />
       </figure>
       <div className="card-body min-h-40">

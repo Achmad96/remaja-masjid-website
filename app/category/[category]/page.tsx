@@ -5,6 +5,7 @@ import Container from "@/components/ui/Container";
 import ArticleCard from "@/components/pages/category/ArticleCard";
 import PaginationComponent from "@/components/pages/category/PaginationComponent";
 import { formatCategory } from "@/utils/format-util";
+import { Suspense } from "react";
 
 interface IPage {
   params: {
