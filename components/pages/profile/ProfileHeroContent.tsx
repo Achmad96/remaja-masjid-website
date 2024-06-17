@@ -39,7 +39,7 @@ export default function ProfileHeroContent() {
       initial={"closed"}
       animate={"open"}
       variants={parentVariant}
-      className="flex flex-col gap-2"
+      className="flex flex-col gap-2 max-sm:items-center"
     >
       <motion.h2
         variants={childVariant}

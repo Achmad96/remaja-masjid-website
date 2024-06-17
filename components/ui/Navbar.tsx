@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import NavigationController from "./NavigationController";
+
 import { getCategories } from "@/utils/notion-service";
 import { ImageWithoutBlurData } from "@/components/ui/ImageComponent";
 
@@ -22,18 +24,7 @@ export default async function Navbar() {
             </Link>
           </li>
           <li>
-            <details>
-              <summary className="text-base text-white">Kategori</summary>
-              <ul className="z-50 rounded-t-none bg-[#55AD9B] p-2">
-                {categories.map((category: string, i: number) => (
-                  <li key={i} className="text-white">
-                    <Link href={`/category/${category.toLowerCase()}`}>
-                      {category}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </details>
+            <NavigationController categories={categories} />
           </li>
         </ul>
       </div>
