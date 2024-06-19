@@ -29,7 +29,19 @@ function formatDate(date: string): string {
 }
 
 function formatCategory(category: string): string {
-  return category.charAt(0).toUpperCase() + category.slice(1);
+  category = category.charAt(0).toUpperCase() + category.slice(1);
+  category = category.replace(/[-_][a-z]/g, function (match) {
+    return match.charAt(0) + match.charAt(1).toUpperCase();
+  });
+  return category;
 }
 
-export { formatDate, formatDescription, formatCategory };
+function getSubCategory(category: string): string {
+  const categories = category.match(/(\w+)/gi) as string[];
+  return categories
+    .map((v) => (v.includes("_") ? v.replaceAll("_", " ") : v))
+    .slice(1)
+    .toString();
+}
+
+export { formatDate, formatDescription, formatCategory, getSubCategory };

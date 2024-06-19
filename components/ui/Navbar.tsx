@@ -1,12 +1,12 @@
 import Link from "next/link";
 
-import NavigationController from "./NavigationController";
+import NavigationController from "@/components/ui/NavigationController";
 
 import { getCategories } from "@/utils/notion-service";
 import { ImageWithoutBlur } from "@/components/ui/ImageComponent";
 
 export default async function Navbar() {
-  const categories = await getCategories();
+  const categories = (await getCategories()) as string[];
   return (
     <nav className="navbar z-[100] h-[12dvh] justify-between bg-[#55AD9B] px-7">
       <Link href={"/"} className="btn btn-ghost relative h-[3.5rem] w-16">
@@ -24,7 +24,7 @@ export default async function Navbar() {
             </Link>
           </li>
           <li>
-            <NavigationController categories={categories} />
+            <NavigationController categories={categories.sort()} />
           </li>
         </ul>
       </div>
