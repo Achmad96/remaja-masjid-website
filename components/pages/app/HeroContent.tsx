@@ -47,7 +47,7 @@ export default function HeroContent() {
         REMAJA MASJID NURUL HAQQ
       </motion.h1>
       <motion.p variants={itemVariant} className="max-sm:text-sm">
-        Bertumbuh dalam Iman, Berkontribusi untuk Umat
+        Bertumbuh dalam Iman, Berkontribusi untuk Umat
       </motion.p>
     </motion.div>
   );

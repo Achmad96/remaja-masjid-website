@@ -7,16 +7,6 @@ import type { ArticleResponseType } from "@/app/types";
 import { getArticlesByCategory } from "@/utils/notion-service";
 import { getSubCategory, formatCategory } from "@/utils/format-util";
 
-interface IPage {
-  params: {
-    category: string;
-  };
-  searchParams: {
-    prevCursor: string;
-    startCursor: string;
-  };
-}
-
 const ARTICLES_PER_PAGE = 6; // Maximum number of articles per page
 export const revalidate = 600; // revalidate every 10 minutes
 export const dynamicParams = true;
@@ -45,6 +35,15 @@ function EmptyArticle({ category }: { category: string }) {
   );
 }
 
+interface IPage {
+  params: {
+    category: string;
+  };
+  searchParams: {
+    prevCursor: string;
+    startCursor: string;
+  };
+}
 export default async function Page({ params, searchParams }: IPage) {
   const { startCursor } = searchParams;
   const category = formatCategory(params.category);
