@@ -54,7 +54,8 @@ export default async function Page({ params, searchParams }: IPage) {
     ARTICLES_PER_PAGE,
   )) as ArticleResponseType;
   const { articles, nextCursor, hasMore } = response;
-  if (!articles.length) return <EmptyArticle category={category} />;
+  if (!articles.length)
+    return <EmptyArticle category={subCategory || category} />;
   return (
     <Container className="my-10 flex flex-col items-center gap-3 max-sm:flex-col">
       <h1 className="text-3xl max-sm:text-xl">
