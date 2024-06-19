@@ -54,9 +54,9 @@ export default function NavigationController({
       .map((value) => value.split("-")),
   );
   return (
-    <details ref={ref} className="w-full text-white">
+    <details ref={ref} className="w-52 text-white max-sm:w-full">
       <summary className="text-base">Kategori</summary>
-      <ul className="menu z-50 rounded-t-none bg-[#55AD9B] p-2">
+      <ul className="z-50 rounded-t-none bg-[#55AD9B] p-2">
         {categories
           .filter((value) => !value.includes("-"))
           .map((category: string, i: number) => (
