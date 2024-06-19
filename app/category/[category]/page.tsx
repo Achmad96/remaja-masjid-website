@@ -58,7 +58,9 @@ export default async function Page({ params, searchParams }: IPage) {
   if (!articles.length) return <EmptyArticle category={category} />;
   return (
     <Container className="my-10 flex flex-col items-center gap-3 max-sm:flex-col">
-      <h1 className="text-3xl max-sm:text-xl">Kategori {subCategory}</h1>
+      <h1 className="text-3xl max-sm:text-xl">
+        Kategori {category || subCategory}
+      </h1>
       <BreadCrumbs category={subCategory || category} />
       <main className="flex h-auto w-full flex-wrap justify-center gap-3">
         {articles.map((article) => (
