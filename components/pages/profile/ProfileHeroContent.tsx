@@ -39,7 +39,7 @@ export default function ProfileHeroContent() {
       initial={"closed"}
       animate={"open"}
       variants={parentVariant}
-      className="flex flex-col gap-2 max-sm:items-center"
+      className="flex flex-col gap-2 max-lg:items-center"
     >
       <motion.h2
         variants={childVariant}
@@ -49,7 +49,7 @@ export default function ProfileHeroContent() {
       </motion.h2>
       <motion.p
         variants={childVariant}
-        className="w-[30rem] text-justify max-md:w-[95%]"
+        className="w-[30rem] text-justify max-lg:w-[95%] max-md:text-sm"
       >
         Organisasi Remaja Masjid Nurul Haqq adalah organisasi yang terdiri dari
         para remaja yang aktif dalam kegiatan di masjid. Tujuan utama dari

@@ -7,7 +7,7 @@ export default async function Page() {
   return (
     <Container
       className={
-        "flex h-full w-[90%] items-center justify-around max-md:flex-col max-sm:my-10 max-sm:gap-7"
+        "flex h-full w-[90%] items-center justify-around max-lg:flex-col max-lg:gap-3"
       }
     >
       <ProfileHero />

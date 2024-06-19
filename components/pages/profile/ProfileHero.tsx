@@ -7,8 +7,8 @@ export default function ProfileHero() {
   const fileUrl = process.env.NEXT_PUBLIC_FILE_URL;
   const profileId = process.env.NEXT_PUBLIC_PROFILE_HERO_FILE_ID;
   return (
-    <div className="-z-50 w-[50%] max-lg:w-[75%] max-md:w-[90%] max-sm:w-full">
-      <ImageContainer className="relative -left-8 h-[30rem] w-full max-md:left-0 max-sm:h-[17rem]">
+    <div className="-z-50 w-[50%] max-lg:w-[75%] max-md:w-[90%] max-sm:w-[95%]">
+      <ImageContainer className="relative -left-8 h-[30rem] w-full max-lg:h-[26rem] max-md:left-0 max-md:h-[25rem] max-sm:h-[17rem]">
         <ImageWithoutBlur
           src={`${fileUrl}&id=${profileId}`}
           alt="profile-remas"
