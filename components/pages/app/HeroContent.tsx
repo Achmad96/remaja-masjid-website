@@ -44,7 +44,7 @@ export default function HeroContent() {
         variants={itemVariant}
         className="text-5xl font-bold text-white max-sm:text-2xl"
       >
-        Remaja Masjid Nurul HAQQ
+        REMAJA MASJID NURUL HAQQ
       </motion.h1>
       <motion.p variants={itemVariant} className="max-sm:text-sm">
         Bertumbuh dalam Iman, Berkontribusi untuk Umat
