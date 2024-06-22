@@ -47,9 +47,9 @@ function HeaderArticleSection({
 
 function ArticleSection({ markdown }: { markdown: MdStringObject }) {
   return (
-    <section className="flex h-auto w-full items-center justify-center">
+    <section className="flex h-auto w-full items-center">
       {markdown.parent ? (
-        <article className="prose mx-auto mb-10 max-w-[80%]">
+        <article className="prose mb-10 ml-[10%] max-w-[80%]">
           <Markdown>{markdown.parent}</Markdown>
         </article>
       ) : (
