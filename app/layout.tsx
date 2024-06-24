@@ -5,6 +5,8 @@ import "./globals.css";
 import Navbar from "@/components/ui/Navbar";
 import NextProgressBar from "@/components/ui/NextProgressBar";
 
+export const revalidate = 600;
+
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Remas Nurul Haqq",

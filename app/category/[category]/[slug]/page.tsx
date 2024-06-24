@@ -7,7 +7,6 @@ import { type BlurImageDataType, getBlurImageData } from "@/app/actions";
 
 import { ImageWithBlur, ImageContainer } from "@/components/ui/ImageComponent";
 
-import AuthorBadge from "@/components/ui/AuthorBadge";
 import Container from "@/components/ui/Container";
 
 import { MdStringObject } from "notion-to-md/build/types";
@@ -39,7 +38,7 @@ function HeaderArticleSection({
       <div className="ml-[10%] flex flex-col gap-3 max-sm:ml-[5%] max-sm:w-[90%]">
         <h1 className="mt-7 text-5xl max-sm:text-3xl">{title}</h1>
         <p>Terakhir update pada tanggal {updatedAt}</p>
-        <AuthorBadge author={author} />
+        <p>{author}</p>
       </div>
     </section>
   );

@@ -47,6 +47,7 @@ const getAndTransformPageToArticleForm = async (
     CreatedAt,
     UpdatedAt,
   } = properties;
+  console.log(Author);
   return {
     id: page.id as string,
     cover:
@@ -57,7 +58,9 @@ const getAndTransformPageToArticleForm = async (
           : (page.cover.external.url as string),
     title: Title.title[0].plain_text as string,
     description: formatDescription(Description) as string,
-    author: await getAuthorById(Author.people[0].id),
+    author: Author.rich_text
+      .map((word: any) => word.plain_text)
+      .join(", ") as string,
     category: Category.select.name as string,
     published: Published.checkbox as boolean,
     slug: Slug.formula.string as string,

@@ -4,7 +4,7 @@ type ArticleType = {
   id: string;
   title: string;
   description: string;
-  author: AuthorType;
+  author: string;
   published: boolean;
   cover: string;
   category: string;
