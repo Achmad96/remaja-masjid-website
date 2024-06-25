@@ -47,7 +47,6 @@ const getAndTransformPageToArticleForm = async (
     CreatedAt,
     UpdatedAt,
   } = properties;
-  console.log(Author);
   return {
     id: page.id as string,
     cover:

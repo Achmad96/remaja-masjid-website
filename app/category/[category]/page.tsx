@@ -6,6 +6,7 @@ import PaginationComponent from "@/components/pages/category/PaginationComponent
 import type { ArticleResponseType } from "@/app/types";
 import { getArticlesByCategory } from "@/utils/notion-service";
 import { getSubCategory, formatCategory } from "@/utils/format-util";
+import Navbar from "@/components/ui/Navbar";
 
 const ARTICLES_PER_PAGE = 6; // Maximum number of articles per page
 export const revalidate = 600; // revalidate every 10 minutes
@@ -57,22 +58,25 @@ export default async function Page({ params, searchParams }: IPage) {
   if (!articles.length)
     return <EmptyArticle category={subCategory || category} />;
   return (
-    <Container className="my-10 flex flex-col items-center gap-3 max-sm:flex-col">
-      <h1 className="text-3xl max-sm:text-xl">
-        Kategori {category || subCategory}
-      </h1>
-      <BreadCrumbs category={subCategory || category} />
-      <main className="flex h-auto w-full flex-wrap justify-center gap-3">
-        {articles.map((article) => (
-          <ArticleCard key={article.id} article={article} />
-        ))}
-      </main>
-      <PaginationComponent
-        category={category}
-        articles={articles}
-        nextCursor={nextCursor}
-        hasMore={hasMore}
-      />
-    </Container>
+    <>
+      <Navbar />
+      <Container className="my-10 flex flex-col items-center gap-3 max-sm:flex-col">
+        <h1 className="text-3xl max-sm:text-xl">
+          Kategori {category || subCategory}
+        </h1>
+        <BreadCrumbs category={subCategory || category} />
+        <main className="flex h-auto w-full flex-wrap justify-center gap-3">
+          {articles.map((article) => (
+            <ArticleCard key={article.id} article={article} />
+          ))}
+        </main>
+        <PaginationComponent
+          category={category}
+          articles={articles}
+          nextCursor={nextCursor}
+          hasMore={hasMore}
+        />
+      </Container>
+    </>
   );
 }

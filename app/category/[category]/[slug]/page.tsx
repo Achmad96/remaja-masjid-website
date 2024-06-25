@@ -10,6 +10,7 @@ import { ImageWithBlur, ImageContainer } from "@/components/ui/ImageComponent";
 import Container from "@/components/ui/Container";
 
 import { MdStringObject } from "notion-to-md/build/types";
+import Navbar from "@/components/ui/Navbar";
 
 export const revalidate = 600; // revalidate the data every 10 minutes
 export const dynamicParams = true;
@@ -67,10 +68,13 @@ export default async function Page({ params }: PageProps) {
     article.cover,
   )) as BlurImageDataType;
   return (
-    <Container className="mt-10">
-      <HeaderArticleSection article={article} blurImageData={blurImageData} />
-      <ArticleSection markdown={markdown} />
-    </Container>
+    <>
+      <Navbar />
+      <Container className="mt-10">
+        <HeaderArticleSection article={article} blurImageData={blurImageData} />
+        <ArticleSection markdown={markdown} />
+      </Container>
+    </>
   );
 }
 
