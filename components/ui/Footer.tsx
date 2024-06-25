@@ -10,15 +10,15 @@ export default function Footer() {
           "https://www.instagram.com/remas.nurulhaqq?igsh=MWwyOWkyazFlYzN6Mg=="
         }
       >
-        <FaInstagram className="h-7 w-7" />
-        <span className="text-sm">remas.nurulhaqq</span>
+        <FaInstagram className="h-7 w-7 max-sm:h-5 max-sm:w-5" />
+        <span className="text-sm max-sm:text-xs">remas.nurulhaqq</span>
       </Link>
       <Link
         className="flex items-center gap-2 text-white"
         href={"https://www.tiktok.com/@remas.nurulhaqq?_t=8nUSx7yl1es&_r=1"}
       >
-        <FaTiktok className="h-7 w-7" />
-        <span className="text-sm">remas.nurulhaqq</span>
+        <FaTiktok className="h-7 w-7 max-sm:h-5 max-sm:w-5" />
+        <span className="text-sm max-sm:text-xs">remas.nurulhaqq</span>
       </Link>
     </footer>
   );
