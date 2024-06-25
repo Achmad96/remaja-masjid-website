@@ -4,6 +4,7 @@ import "./globals.css";
 
 import Navbar from "@/components/ui/Navbar";
 import NextProgressBar from "@/components/ui/NextProgressBar";
+import Footer from "@/components/ui/Footer";
 
 export const revalidate = 600;
 
@@ -27,6 +28,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <NextProgressBar />
         {children}
+        <Footer />
       </body>
     </html>
   );
