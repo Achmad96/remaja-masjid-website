@@ -24,15 +24,15 @@ export default async function Image({ params }: any) {
       // ImageResponse JSX element
       <div
         style={{
-          fontSize: 128,
           backgroundImage: `url('${article.cover}')`,
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          width: "100px",
+          height: "100px",
+          backgroundSize: "cover",
         }}
       />
     ),
+    {
+      ...size,
+    },
   );
 }

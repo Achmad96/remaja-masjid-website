@@ -67,6 +67,8 @@ export default async function Page({ params }: PageProps) {
   const blurImageData = (await getBlurImageData(
     article.cover,
   )) as BlurImageDataType;
+  console.log(article.cover);
+
   return (
     <>
       <Navbar />
