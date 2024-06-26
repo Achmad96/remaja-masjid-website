@@ -4,7 +4,7 @@ import { ImageResponse } from "next/og";
 
 // Route segment config
 export const runtime = "edge";
-
+export const dynamic = "force-dynamic";
 // Image metadata
 export const alt = "Image Cover";
 export const size = {
@@ -22,14 +22,7 @@ export default async function Image({ params }: any) {
   return new ImageResponse(
     (
       // ImageResponse JSX element
-      <div
-        style={{
-          backgroundImage: `url('${article.cover}')`,
-          width: "100px",
-          height: "100px",
-          backgroundSize: "cover",
-        }}
-      />
+      <img width={"512"} height={"512"} src={article.cover} />
     ),
     {
       ...size,
