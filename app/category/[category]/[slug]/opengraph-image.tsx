@@ -22,7 +22,7 @@ export default async function Image({ params }: any) {
   return new ImageResponse(
     (
       // ImageResponse JSX element
-      <img width={"512"} height={"512"} src={article.cover} />
+      <img width={"1200"} height={"630"} src={article.cover} />
     ),
     {
       ...size,
